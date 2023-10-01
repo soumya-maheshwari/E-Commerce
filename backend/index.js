@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
 const authRoutes = require("./routes/authRoutes");
+const attendanceRoutes = require("./routes/attendanceRoutes");
 
 const { errorMiddleware } = require("./middlewares/ErrorHandler");
 app.use(express.json());
@@ -27,3 +28,4 @@ app.use(errorMiddleware);
 
 //Routes
 app.use("/auth", authRoutes, errorMiddleware);
+app.use("/attendance", attendanceRoutes, errorMiddleware);
