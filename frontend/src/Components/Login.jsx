@@ -1,10 +1,63 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUserThunk } from "../Redux/authSlice";
+import { ToastContainer, toast } from "react-toastify";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const sm = useSelector((state) => state.auth);
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {};
+  const userData = {
+    email,
+    password,
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    dispatch(loginUserThunk(userData))
+      .then((res) => {
+        console.log(res);
+        if (res.payload.data.success) {
+          toast.success(`${res.payload.data.msg}`, {
+            position: "top-right",
+            theme: "dark",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+
+          setTimeout(() => {
+            // navigate("/homePage");
+          }, 3000);
+
+          // localStorage.setItem("userInfo", JSON.stringify(sm.profile));
+
+          localStorage.setItem("userInfo", JSON.stringify(res.payload.data));
+        } else {
+          toast.error(`${res.payload.data.msg}`, {
+            position: "top-right",
+            theme: "DARK",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+        }
+        return res;
+      })
+      .catch((err) => {
+        // console.log(err);
+        return err.reponse;
+      });
+  };
+
   return (
     <>
       <div className="container">
@@ -57,6 +110,7 @@ const Login = () => {
           </form>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };

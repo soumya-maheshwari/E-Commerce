@@ -1,11 +1,62 @@
 import React, { useState } from "react";
+import { registerUserThunk } from "../Redux/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
 
 const Signup = () => {
+  const dispatch = useDispatch();
+  const sm = useSelector((state) => state.auth);
+  console.log(sm);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const userData = {
+    name,
+    email,
+    password,
+  };
 
-  const handleSignup = () => {};
+  const handleSignup = (e) => {
+    e.preventDefault();
+    dispatch(registerUserThunk(userData))
+      .then((res) => {
+        // console.log(res);
+        if (res.payload.data.success) {
+          toast.success(`${res.payload.data.msg}`, {
+            position: "top-right",
+            theme: "dark",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+
+          // setTimeout(() => {
+          //   navigate("/");
+          // }, 3000);
+
+          localStorage.setItem("userInfo", JSON.stringify(sm.profile));
+        } else {
+          toast.error(`${res.payload.data.msg}`, {
+            position: "top-right",
+            // theme: "DARK",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+        }
+        return res;
+      })
+      .catch((err) => {
+        // console.log(err);
+        return err.reponse;
+      });
+  };
+
   return (
     <>
       <div className="container">
@@ -19,9 +70,9 @@ const Signup = () => {
                 type="text"
                 value={name}
                 className="input-field"
-                id="email"
+                id="name"
                 placeholder="Full Name"
-                name="email"
+                name="name"
                 required
                 onChange={(e) => setName(e.target.value)}
               />
@@ -73,6 +124,7 @@ const Signup = () => {
           </form>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };
