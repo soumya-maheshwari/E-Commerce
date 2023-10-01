@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
 
 import authReducer from "./authSlice";
+import attendanceReducer from "./attendanceSlice";
 
 // Redux Persist configuration
 const persistConfig = {
@@ -14,10 +15,15 @@ const persistConfig = {
 
 // Create persisted reducers
 const persistedAuthReducer = persistReducer(persistConfig, authReducer);
+const persistedAttendanceReducer = persistReducer(
+  persistConfig,
+  attendanceReducer
+);
 
 const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
+    attendance: persistedAttendanceReducer,
   },
 
   middleware: [thunk],
