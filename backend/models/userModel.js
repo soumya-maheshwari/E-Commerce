@@ -15,6 +15,9 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    faceImageURL: {
+      type: String,
+    },
   },
 
   { timestamps: true }

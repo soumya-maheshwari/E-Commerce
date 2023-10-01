@@ -88,7 +88,7 @@ const login = async (req, res, next) => {
 
 const signup = async (req, res, next) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, faceImageURL } = req.body;
 
     const isUserExists = await User.findOne({ email: email.toLowerCase() });
 
@@ -113,6 +113,7 @@ const signup = async (req, res, next) => {
       name,
       email,
       password: hashPassword,
+      faceImageURL,
     });
 
     const savedUser = await user.save();

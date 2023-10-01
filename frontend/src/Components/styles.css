@@ -55,6 +55,23 @@
   border: 1px solid black;
 }
 
+.login-btn2 {
+  display: block;
+  width: 32vw;
+  padding: 1 0px;
+  font-size: 19px;
+  height: 60px;
+  background-color: rgb(116, 113, 111);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 29px;
+}
+.web-cam {
+  height: 220px;
+}
 .login-btn {
   display: block;
   width: 32vw;
@@ -72,4 +89,9 @@
 
 button[type="submit"]:hover {
   background-color: rgb(236, 121, 34);
+}
+.captured-image {
+  margin: 0 auto;
+  height: 200px;
+  width: 200px;
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { registerUserThunk } from "../Redux/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
+import Webcam from "react-webcam";
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -11,49 +12,45 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [faceImageURL, setFaceImageURL] = useState("");
+  const [showWebcam, setShowWebcam] = useState(false);
+  const [imageClicked, setImageClicked] = useState(false);
+
   const userData = {
     name,
     email,
     password,
+    faceImageURL,
+  };
+
+  console.log(userData);
+
+  const webcamRef = React.useRef(null);
+  const capture = () => {
+    if (webcamRef.current) {
+      const imageSrc = webcamRef.current.getScreenshot();
+      setFaceImageURL(imageSrc);
+      setShowWebcam(false); // Hide the webcam component after capturing
+      setImageClicked(false);
+    }
+  };
+  const handleCaptureButtonClick = () => {
+    setShowWebcam(true); // Show the webcam when the button is
+    capture();
   };
 
   const handleSignup = (e) => {
     e.preventDefault();
     dispatch(registerUserThunk(userData))
       .then((res) => {
-        // console.log(res);
         if (res.payload.data.success) {
-          toast.success(`${res.payload.data.msg}`, {
-            position: "top-right",
-            theme: "dark",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-          });
-
-          // setTimeout(() => {
-          //   navigate("/");
-          // }, 3000);
-
-          localStorage.setItem("userInfo", JSON.stringify(sm.profile));
+          // Handle success
         } else {
-          toast.error(`${res.payload.data.msg}`, {
-            position: "top-right",
-            // theme: "DARK",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-          });
+          // Handle error
         }
-        return res;
       })
       .catch((err) => {
-        // console.log(err);
-        return err.reponse;
+        // Handle error
       });
   };
 
@@ -107,20 +104,52 @@ const Signup = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <p className="text-forgot">
-              <span className="link">
-                {/* <Link to="/forgotPassword"> Forogt Password ?</Link> */}
-              </span>
-            </p>
+            <div className="form-group">
+              {showWebcam ? (
+                <Webcam
+                  ref={webcamRef}
+                  screenshotFormat="image/jpeg"
+                  className="web-cam"
+                />
+              ) : null}
+
+              {faceImageURL ? (
+                <img
+                  src={faceImageURL}
+                  alt="Captured Face"
+                  className="captured-image"
+                />
+              ) : null}
+              {!showWebcam && !faceImageURL ? (
+                <button
+                  onClick={handleCaptureButtonClick}
+                  className="login-btn2"
+                >
+                  Capture Image
+                </button>
+              ) : (
+                !imageClicked && (
+                  <button
+                    onClick={handleCaptureButtonClick}
+                    className="login-btn2"
+                  >
+                    Click
+                  </button>
+                )
+              )}
+              {/* {!showWebcam && faceImageURL ? (
+                <button
+                  type="button"
+                  onClick={handleCaptureButtonClick}
+                  className="login-btn2"
+                >
+                  Recapture
+                </button>
+              ) : null} */}
+            </div>
             <button type="submit" className="login-btn">
               Register
-            </button>{" "}
-            <p className="textt">
-              Already have an account?
-              <span className="link">
-                {/* <Link to="/signup">SIGNUP</Link> */}
-              </span>
-            </p>
+            </button>
           </form>
         </div>
       </div>
