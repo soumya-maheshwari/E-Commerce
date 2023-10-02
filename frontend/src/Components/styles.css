@@ -4,7 +4,7 @@
   width: 100vw;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background-color: #121212;
   color: white;
 }
@@ -94,4 +94,58 @@ button[type="submit"]:hover {
   margin: 0 auto;
   height: 200px;
   width: 200px;
+}
+.textt {
+  /* display: flex; */
+  margin-top: 30px;
+  font-size: 19px;
+  display: block;
+}
+
+.link a {
+  text-decoration: none;
+  font-weight: 400;
+  padding-left: 10px;
+  color: rgb(218, 101, 47);
+}
+
+/* webcam */
+
+.web-cam-page {
+  display: flex;
+  display: flex;
+  width: 100vw;
+  height: inherit;
+  height: 100vh;
+  background-color: #121212;
+  color: white;
+  flex-direction: row;
+}
+.capture {
+  display: block;
+  width: 20vw;
+  font-size: 25px;
+  height: 40vh;
+  background-color: rgb(116, 113, 111);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 3vw;
+  margin-top: 5vh;
+}
+
+.name {
+  display: flex;
+  font-size: 35px;
+  height: 40vh;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-left: 10vw;
+  margin-top: 5vh;
+  flex-direction: row;
 }

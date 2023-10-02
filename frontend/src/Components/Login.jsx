@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUserThunk } from "../Redux/authSlice";
 import { ToastContainer, toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -35,8 +36,6 @@ const Login = () => {
           setTimeout(() => {
             // navigate("/homePage");
           }, 3000);
-
-          // localStorage.setItem("userInfo", JSON.stringify(sm.profile));
 
           localStorage.setItem("userInfo", JSON.stringify(res.payload.data));
         } else {
@@ -104,7 +103,7 @@ const Login = () => {
             <p className="textt">
               Don't have an account?
               <span className="link">
-                {/* <Link to="/signup">SIGNUP</Link> */}
+                <Link to="/signup">Register</Link>
               </span>
             </p>
           </form>

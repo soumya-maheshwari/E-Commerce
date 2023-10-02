@@ -3,6 +3,7 @@ import { registerUserThunk } from "../Redux/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import Webcam from "react-webcam";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -43,14 +44,37 @@ const Signup = () => {
     e.preventDefault();
     dispatch(registerUserThunk(userData))
       .then((res) => {
+        console.log(res);
         if (res.payload.data.success) {
-          // Handle success
+          toast.success(`${res.payload.data.msg}`, {
+            position: "top-right",
+            // theme: "dark",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+          //  setTimeout(() => {
+          //   navigate("/");
+          // }, 3000);
+
+          localStorage.setItem("userInfo", JSON.stringify(sm.profile));
         } else {
-          // Handle error
+          toast.error(`${res.payload.data.msg}`, {
+            position: "top-right",
+            // theme: "DARK",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
         }
       })
       .catch((err) => {
-        // Handle error
+        console.log(err);
+        return err.response;
       });
   };
 
@@ -150,6 +174,12 @@ const Signup = () => {
             <button type="submit" className="login-btn">
               Register
             </button>
+            <p className="textt">
+              Already have an account?
+              <span className="link">
+                <Link to="/">Login</Link>
+              </span>
+            </p>
           </form>
         </div>
       </div>
