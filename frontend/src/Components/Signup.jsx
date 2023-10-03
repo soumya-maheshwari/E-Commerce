@@ -27,6 +27,7 @@ const Signup = () => {
   console.log(userData);
 
   const webcamRef = React.useRef(null);
+
   const capture = () => {
     if (webcamRef.current) {
       const imageSrc = webcamRef.current.getScreenshot();
@@ -35,6 +36,7 @@ const Signup = () => {
       setImageClicked(false);
     }
   };
+
   const handleCaptureButtonClick = () => {
     setShowWebcam(true); // Show the webcam when the button is
     capture();

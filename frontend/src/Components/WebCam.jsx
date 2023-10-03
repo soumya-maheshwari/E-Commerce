@@ -34,24 +34,32 @@ const WebCam = () => {
           />
         ) : null}
 
-        {faceImageURL ? (
-          <img
-            src={faceImageURL}
-            alt="Captured Face"
-            className="captured-image"
-          />
-        ) : null}
-        {!showWebcam && !faceImageURL ? (
-          <button onClick={handleCaptureButtonClick} className="capture">
-            Capture Image
-          </button>
-        ) : (
-          !imageClicked && (
-            <button onClick={handleCaptureButtonClick} className="">
-              Click
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          {faceImageURL ? (
+            <img
+              src={faceImageURL}
+              alt="Captured Face"
+              className="captured-image2"
+            />
+          ) : null}
+
+          {!showWebcam && !faceImageURL ? (
+            <button onClick={handleCaptureButtonClick} className="capture">
+              Capture Image
             </button>
-          )
-        )}
+          ) : (
+            !imageClicked && (
+              <button onClick={handleCaptureButtonClick} className="capture2">
+                Click
+              </button>
+            )
+          )}
+        </div>
 
         <div className="name">
           <p>Welcome, {user.user.name}</p>
