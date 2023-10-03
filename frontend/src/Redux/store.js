@@ -5,6 +5,7 @@ import thunk from "redux-thunk";
 
 import authReducer from "./authSlice";
 import attendanceReducer from "./attendanceSlice";
+import cartReducer from "./cartSlice";
 
 // Redux Persist configuration
 const persistConfig = {
@@ -19,11 +20,13 @@ const persistedAttendanceReducer = persistReducer(
   persistConfig,
   attendanceReducer
 );
+const persistedCartReducer = persistReducer(persistConfig, cartReducer);
 
 const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
     attendance: persistedAttendanceReducer,
+    cart: persistedCartReducer,
   },
 
   middleware: [thunk],

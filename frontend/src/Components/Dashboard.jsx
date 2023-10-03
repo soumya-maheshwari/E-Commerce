@@ -41,7 +41,7 @@ const Dashboard = () => {
   return (
     <>
       <div className="dashboard">
-        <h1>welocme, user</h1>
+        <h1>welcome, user</h1>
         <button className="login-btn" onClick={handleClickOpen}>
           Add Attendance
         </button>
