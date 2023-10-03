@@ -18,6 +18,10 @@ const userSchema = mongoose.Schema(
     faceImageURL: {
       type: String,
     },
+    cart: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Cart",
+    },
   },
 
   { timestamps: true }
