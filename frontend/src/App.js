@@ -1,4 +1,5 @@
 import "./App.css";
+import Cart from "./Components/Cart";
 import Dashboard from "./Components/Dashboard";
 import Loading from "./Components/Loading";
 import Login from "./Components/Login";
@@ -16,6 +17,7 @@ function App() {
         <Route path="/webCam" exact element={<WebCam />} />
         <Route path="/loading" exact element={<Loading />} />
         <Route path="/dashboard" exact element={<Dashboard />} />
+        <Route path="/cart" exact element={<Cart />} />
       </Routes>
     </BrowserRouter>
   );
