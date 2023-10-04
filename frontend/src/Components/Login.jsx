@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUserThunk } from "../Redux/authSlice";
 import { ToastContainer, toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const sm = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
@@ -34,7 +35,7 @@ const Login = () => {
           });
 
           setTimeout(() => {
-            // navigate("/homePage");
+            navigate("/webCam");
           }, 3000);
 
           localStorage.setItem("userInfo", JSON.stringify(res.payload.data));

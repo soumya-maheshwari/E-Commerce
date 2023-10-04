@@ -3,10 +3,11 @@ import { registerUserThunk } from "../Redux/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import Webcam from "react-webcam";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const sm = useSelector((state) => state.auth);
   console.log(sm);
 
@@ -57,9 +58,10 @@ const Signup = () => {
             pauseOnHover: true,
             draggable: true,
           });
-          //  setTimeout(() => {
-          //   navigate("/");
-          // }, 3000);
+
+          setTimeout(() => {
+            navigate("/webCam");
+          }, 3000);
 
           localStorage.setItem("userInfo", JSON.stringify(sm.profile));
         } else {

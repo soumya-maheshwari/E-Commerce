@@ -125,14 +125,39 @@ const getAllProducts = async (req, res, next) => {
       return res.status(200).json({
         success: true,
         cart: [],
+        total: 0,
         msg: "Cart is empty",
       });
     }
 
+    const detailedCartItems = [];
+
+    let total = 0;
+
+    cart.items.forEach((item) => {
+      const product = item.product;
+      const itemTotal = product.price * item.quantity;
+
+      // Add the detailed item information to the array
+      detailedCartItems.push({
+        product: {
+          _id: product._id,
+          name: product.productName,
+          price: product.price,
+        },
+        quantity: item.quantity,
+        itemTotal: itemTotal,
+      });
+
+      total += itemTotal;
+    });
+
     return res.status(200).json({
       success: true,
       cart: cart.items,
+      total: total,
       msg: "Products in the cart",
+      detailedCartItems: detailedCartItems,
     });
   } catch (error) {
     console.log(error);
