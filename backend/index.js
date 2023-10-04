@@ -31,6 +31,6 @@ console.log(`Connected to port ${process.env.PORT}`);
 
 //Routes
 app.use("/auth", authRoutes, errorMiddleware);
-// app.use("/attendance", attendanceRoutes, errorMiddleware);
+app.use("/attendance", attendanceRoutes, errorMiddleware);
 app.use("/cart", cartRoutes, errorMiddleware);
 app.use("/product", productRoutes, errorMiddleware);

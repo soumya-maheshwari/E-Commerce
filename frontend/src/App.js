@@ -1,4 +1,5 @@
 import "./App.css";
+import AttendancePage from "./Components/AttendancePage";
 import Cart from "./Components/Cart";
 import Dashboard from "./Components/Dashboard";
 import Loading from "./Components/Loading";
@@ -18,6 +19,7 @@ function App() {
         <Route path="/loading" exact element={<Loading />} />
         <Route path="/dashboard" exact element={<Dashboard />} />
         <Route path="/cart" exact element={<Cart />} />
+        <Route path="/attendance" exact element={<AttendancePage />} />
       </Routes>
     </BrowserRouter>
   );

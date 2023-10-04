@@ -6,8 +6,12 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Products from "./Products";
 import { useNavigate } from "react-router-dom";
 import Search from "./Search";
+import { useDispatch } from "react-redux";
+import { logAttendanceThunk } from "../Redux/attendanceSlice";
+import { ToastContainer, toast } from "react-toastify";
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [faceImageURL, setFaceImageURL] = useState("");
   const [showWebcam, setShowWebcam] = useState(false);
@@ -34,6 +38,7 @@ const Dashboard = () => {
   const handleClickOpen = () => {
     setOpen(true);
   };
+  const userData = {};
 
   const handleCart = () => {
     navigate("/cart");
@@ -42,7 +47,33 @@ const Dashboard = () => {
     setOpen(false);
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(logAttendanceThunk(userData))
+      .then((res) => {
+        console.log(res);
+        if (res.payload.data.success) {
+          toast.success(`${res.payload.data.msg}`, {
+            position: "top-right",
+            theme: "dark",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+        }
+        return res;
+      })
+      .catch((err) => {
+        console.log(err);
+        return err.response;
+      });
+  };
+
+  const handleNavigate = () => {
+    navigate("/attendance");
+  };
 
   return (
     <>
@@ -53,7 +84,9 @@ const Dashboard = () => {
           <button className="login-btn" onClick={handleClickOpen}>
             Add Attendance
           </button>
-          <button className="log">View Attendance Log</button>
+          <button className="log" onClick={handleNavigate}>
+            View Attendance Log
+          </button>
           <button className="logg" onClick={handleCart}>
             Cart
           </button>
@@ -117,6 +150,7 @@ const Dashboard = () => {
 
         <Products />
       </div>
+      <ToastContainer />
     </>
   );
 };

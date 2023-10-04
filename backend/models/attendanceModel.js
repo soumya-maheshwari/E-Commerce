@@ -5,12 +5,12 @@ const attendanceSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-  datetime: {
+  date: {
     type: Date,
   },
-  photoPath: {
-    type: String,
-  },
+  // photoPath: {
+  //   type: String,
+  // },
 });
 
 module.exports = mongoose.model("Attendance", attendanceSchema);

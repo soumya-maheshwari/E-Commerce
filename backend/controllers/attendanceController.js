@@ -3,20 +3,24 @@ const { ErrorHandler } = require("../middlewares/ErrorHandler");
 
 const logAttendance = async (req, res, next) => {
   try {
-    const { userId, photoPath } = req.body;
+    const user = req.user;
+    console.log(user);
+    const userId = user._id;
+
+    console.log(user);
+
+    const { photoPath } = req.body;
 
     if (!userId) {
       return next(new ErrorHandler(404, "Login or Signup to continue"));
     }
 
-    if (!photoPath) {
-      return next(new ErrorHandler(404, "profile photo not found"));
-    }
     // Create a new attendance record
     const attendanceRecord = new Attendance({
       userId,
-      datetime: new Date(),
-      photoPath,
+      date: new Date(),
+
+      // photoPath,
     });
     await attendanceRecord.save();
 
@@ -35,7 +39,17 @@ const logAttendance = async (req, res, next) => {
 
 const getAttendance = async (req, res, next) => {
   try {
-    const { userId } = req.params;
+    const user = req.user;
+    console.log(user);
+    const userId = user._id;
+
+    console.log(user);
+
+    const { photoPath } = req.body;
+
+    if (!userId) {
+      return next(new ErrorHandler(404, "Login or Signup to continue"));
+    }
 
     // Find all attendance records for the specified user
     const attendanceRecords = await Attendance.find({ userId });

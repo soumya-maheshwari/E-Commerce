@@ -7,6 +7,7 @@ const SearchComp = (props) => {
         style={{
           backgroundColor: "black",
           margin: "0 auto",
+          marginBottom: "10vh",
         }}
         // onMouseOver={handleUserClick}
         // onMouseLeave={handleLeave}

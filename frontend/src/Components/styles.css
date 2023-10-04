@@ -241,7 +241,7 @@ button[type="submit"]:hover {
   display: flex;
   margin-top: 5px;
   background: #151515;
-  border: 3px solid rgb(37, 36, 36);
+  border: 2px solid rgb(110, 103, 103);
   border-radius: 20px;
   margin-bottom: 10vh;
 }
