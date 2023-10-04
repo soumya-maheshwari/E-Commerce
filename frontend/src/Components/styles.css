@@ -237,6 +237,39 @@ button[type="submit"]:hover {
   cursor: pointer;
   margin-top: 29px;
 }
+.search-user-body {
+  display: flex;
+  margin-top: 5px;
+  background: #151515;
+  border: 3px solid rgb(37, 36, 36);
+  border-radius: 20px;
+  margin-bottom: 10vh;
+}
+.search-user-input {
+  border: none;
+  outline: none;
+  /* position: fixed; */
+  width: 78vw;
+  height: 49px;
+  background: #151515;
+  border-radius: 18px;
+  font-weight: 100;
+  font-size: 19px;
+  /* display: inline-block; */
+  padding-left: 2vw;
+  /* color: rgba(255, 255, 255, 0.8); */
+  color: white;
+}
+
+.search-icon {
+  margin-left: 2vw;
+  width: 23px;
+  align-items: center;
+  /* margin: 0 auto; */
+  cursor: pointer;
+  background: transparent;
+  background-color: transparent;
+}
 
 .logg {
   display: block;

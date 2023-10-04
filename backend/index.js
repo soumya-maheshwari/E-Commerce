@@ -6,6 +6,8 @@ const app = express();
 const authRoutes = require("./routes/authRoutes");
 const attendanceRoutes = require("./routes/attendanceRoutes");
 const cartRoutes = require("./routes/cartRoutes");
+const productRoutes = require("./routes/productRoutes");
+
 const axios = require("axios");
 const { errorMiddleware } = require("./middlewares/ErrorHandler");
 app.use(express.json());
@@ -31,3 +33,4 @@ console.log(`Connected to port ${process.env.PORT}`);
 app.use("/auth", authRoutes, errorMiddleware);
 // app.use("/attendance", attendanceRoutes, errorMiddleware);
 app.use("/cart", cartRoutes, errorMiddleware);
+app.use("/product", productRoutes, errorMiddleware);

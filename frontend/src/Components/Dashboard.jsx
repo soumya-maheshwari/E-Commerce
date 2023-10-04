@@ -5,6 +5,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import Products from "./Products";
 import { useNavigate } from "react-router-dom";
+import Search from "./Search";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -58,6 +59,7 @@ const Dashboard = () => {
           </button>
         </div>
 
+        <Search />
         <Dialog open={open} onClose={handleClose}>
           <div className="dialog-class">
             <DialogTitle fontSize={"30px"}>Add Attendance</DialogTitle>
