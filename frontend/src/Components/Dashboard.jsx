@@ -74,11 +74,19 @@ const Dashboard = () => {
   const handleNavigate = () => {
     navigate("/attendance");
   };
+  const user = JSON.parse(localStorage.getItem("userInfo"));
 
   return (
     <>
       <div className="dashboard">
-        <h1>welcome, user</h1>
+        <h1
+          style={{
+            textAlign: "center",
+            fontFamily: "cursive",
+          }}
+        >
+          Welcome {user.user.name}
+        </h1>
 
         <div className="btnss">
           <button className="login-btn" onClick={handleClickOpen}>

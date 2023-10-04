@@ -219,7 +219,7 @@ button[type="submit"]:hover {
 
 .btnss {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-bottom: 10vh;
 }
 
@@ -325,6 +325,13 @@ button[type="submit"]:hover {
   margin: 16px;
   width: 250px;
   text-align: center;
+  box-shadow: 1px 5px 10px rgb(236, 121, 34, 0.5);
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
 }
 
 img {
@@ -443,4 +450,101 @@ img {
   text-align: center;
   font-weight: bolder;
   color: rgb(100, 100, 100, 0.9);
+}
+
+/* attendance */
+.container2 {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* responsive
+ */
+
+/* login page */
+
+@media (max-width: 830px) {
+  .centered-form {
+    padding: 100px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .input-field {
+    width: 54vw;
+  }
+}
+@media (max-width: 620px) {
+  .centered-form {
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .input-field {
+    width: 57vw;
+  }
+}
+
+@media (max-width: 420px) {
+  .centered-form {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .input-field {
+    width: 58vw;
+  }
+}
+
+/* web cam page */
+
+@media (max-width: 720px) {
+  .capture {
+    width: 40vw;
+  }
+
+  .name {
+    font-size: 26px;
+    margin-left: 6vw;
+  }
+  .captured-image2 {
+    width: 40vw;
+  }
+}
+
+@media (max-width: 500px) {
+  .capture {
+    width: 31vw;
+    height: 30vh;
+  }
+
+  .name {
+    font-size: 26px;
+    margin-left: 10vw;
+  }
+  .captured-image2 {
+    width: 37vw;
+    height: 30vh;
+  }
+}
+
+@media (max-width: 380px) {
+  .capture {
+    width: 37vw;
+    height: 30vh;
+  }
+
+  .name {
+    font-size: 26px;
+    margin-left: 10vw;
+  }
+  .captured-image2 {
+    width: 37vw;
+    height: 30vh;
+  }
 }

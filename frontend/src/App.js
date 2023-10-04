@@ -20,6 +20,7 @@ function App() {
         <Route path="/dashboard" exact element={<Dashboard />} />
         <Route path="/cart" exact element={<Cart />} />
         <Route path="/attendance" exact element={<AttendancePage />} />
+        <Route path="/login" exact element={<Login />} />
       </Routes>
     </BrowserRouter>
   );

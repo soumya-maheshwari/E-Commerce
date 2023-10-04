@@ -43,7 +43,7 @@ const AttendancePage = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="container2">
         <Calendar
           localizer={localizer}
           events={attendanceData.map((record) => ({
@@ -56,7 +56,13 @@ const AttendancePage = () => {
           }))}
           startAccessor="start"
           endAccessor="end"
-          style={{ height: 600, width: 1000 }}
+          style={{
+            height: 700,
+            width: 1000,
+            border: "3px solid black",
+            fontWeight: "700",
+            fontSize: "20px",
+          }}
           eventPropGetter={eventStyleGetter} // Apply event styles
         />
       </div>
