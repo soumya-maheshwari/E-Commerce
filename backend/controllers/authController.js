@@ -17,7 +17,7 @@ const home = (req, res, next) => {
 };
 
 const createAccessToken = (user) => {
-  return jwt.sign(user, process.env.JWT_ACCESS_KEY, { expiresIn: "7d" });
+  return jwt.sign(user, process.env.JWT_ACCESS_KEY, { expiresIn: "40d" });
 };
 
 const refreshToken = (req, res, next) => {

@@ -4,8 +4,10 @@ import Webcam from "react-webcam";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import Products from "./Products";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [faceImageURL, setFaceImageURL] = useState("");
   const [showWebcam, setShowWebcam] = useState(false);
   const [imageClicked, setImageClicked] = useState(false);
@@ -32,6 +34,9 @@ const Dashboard = () => {
     setOpen(true);
   };
 
+  const handleCart = () => {
+    navigate("/cart");
+  };
   const handleClose = (value) => {
     setOpen(false);
   };
@@ -42,9 +47,16 @@ const Dashboard = () => {
     <>
       <div className="dashboard">
         <h1>welcome, user</h1>
-        <button className="login-btn" onClick={handleClickOpen}>
-          Add Attendance
-        </button>
+
+        <div className="btnss">
+          <button className="login-btn" onClick={handleClickOpen}>
+            Add Attendance
+          </button>
+          <button className="log">View Attendance Log</button>
+          <button className="logg" onClick={handleCart}>
+            Cart
+          </button>
+        </div>
 
         <Dialog open={open} onClose={handleClose}>
           <div className="dialog-class">

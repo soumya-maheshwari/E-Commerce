@@ -1,46 +1,49 @@
 const Cart = require("../models/cartModel");
 const { ErrorHandler } = require("../middlewares/ErrorHandler");
+const mongoose = require("mongoose");
+const Product = require("../models/productModel");
 
 const addToCart = async (req, res, next) => {
   try {
     const user = req.user;
     const userId = user._id;
 
+    console.log(user);
     if (!user) {
       return next(new ErrorHandler(400, "Login or signup to continue"));
     }
 
-    const productId = req.params.product;
+    const { productId } = req.body;
 
-    if (!productId) {
-      return next(new ErrorHandler(400, "No product found"));
-    }
-    console.log(productId, "p");
-
-    let cart = await Cart.findOne({
-      user: userId,
+    const product = await Product.findOne({
+      id: productId,
     });
 
+    console.log(product._id);
+    if (!product) {
+      return next(new ErrorHandler(400, "Product not found"));
+    }
+    let cart = await Cart.findOne({ user: userId });
+
     if (!cart) {
-      cart = new Cart({
-        user: userId,
-        items: [],
-      });
+      cart = await Cart.create({ user: userId, items: [] });
     }
 
-    // Check if the product is already in the cart
-    const existingItemIndex = cart.items.findIndex(
-      (item) => item.product && item.product.toString() === productId
+    // console.log(cart.items);
+    // const cartItem = cart.items.find((item) => item.product === product._id);
+    const cartItem = cart.items.find((item) =>
+      item.product.equals(product._id)
     );
 
-    if (existingItemIndex !== -1) {
-      // Increment the quantity if the product is already in the cart
-      cart.items[existingItemIndex].quantity += 1;
-    } else {
-      // Add the product to the cart with a quantity of 1
-      cart.items.push({ product: productId, quantity: 1 });
-    }
+    console.log(cartItem);
 
+    if (cartItem) {
+      // Product already in cart, increase quantity
+      cartItem.quantity++;
+    } else {
+      // Product not in cart, add it to the cart items array
+      cart.items.push({ product: product._id, quantity: 1 });
+    }
     await cart.save();
     return res.status(200).json({
       success: true,
@@ -49,7 +52,7 @@ const addToCart = async (req, res, next) => {
     });
   } catch (error) {
     console.error(error);
-    return next(error); // Pass the error to the error handling middleware
+    return next(error);
   }
 };
 
@@ -58,43 +61,50 @@ const removeFromCart = async (req, res, next) => {
     const user = req.user;
     const userId = user._id;
 
+    console.log(user);
     if (!user) {
       return next(new ErrorHandler(400, "Login or signup to continue"));
     }
 
-    const productId = req.params.product;
+    const { productId } = req.body;
 
-    if (!productId) {
-      return next(new ErrorHandler(400, "No product ID found"));
-    }
-
-    let cart = await Cart.findOne({
-      user: userId,
+    const product = await Product.findOne({
+      id: productId,
     });
 
+    console.log(product._id);
+    if (!product) {
+      return next(new ErrorHandler(400, "Product not found"));
+    }
+    let cart = await Cart.findOne({ user: userId });
+
     if (!cart) {
-      return next(new ErrorHandler(404, "Cart not found"));
+      return next(new ErrorHandler(400, "Cart not found"));
     }
 
-    const itemIndex = cart.items.findIndex(
-      (item) => item.product && item.product.toString() === productId
+    // console.log(cart.items);
+    // const cartItem = cart.items.find((item) => item.product === product._id);
+    const cartItem = cart.items.find((item) =>
+      item.product.equals(product._id)
     );
 
-    if (itemIndex !== -1) {
-      cart.items.splice(itemIndex, 1);
-      await cart.save();
+    console.log(cartItem);
+    if (cartItem.quantity >= 1) {
+      cartItem.quantity--;
 
-      return res.status(200).json({
-        success: true,
-        cart,
-        msg: "Product removed from cart",
-      });
-    } else {
-      return next(new ErrorHandler(404, "Product not found in cart"));
+      if (cartItem.quantity == 0) {
+        cart.items = cart.items.filter((item) => item.product !== productId);
+      }
     }
+    await cart.save();
+    return res.status(200).json({
+      success: true,
+      cart,
+      msg: "Product removed from  cart",
+    });
   } catch (error) {
-    console.log(error);
-    return error;
+    console.error(error);
+    return next(error);
   }
 };
 

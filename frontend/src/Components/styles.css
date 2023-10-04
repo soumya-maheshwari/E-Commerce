@@ -199,7 +199,7 @@ button[type="submit"]:hover {
 
 .para {
   text-align: center;
-  margin: 0 auto;
+  margin: 4vw auto;
   justify-content: center;
   align-items: center;
   font-size: 30px;
@@ -209,13 +209,48 @@ button[type="submit"]:hover {
 
 .dashboard {
   display: flex;
-  /* width: 100vw; */
-  /* height: 100vh; */
+  width: 100vw;
+  height: 100vh;
   background-color: #121212;
   color: white;
-  height: auto;
   flex-direction: column;
   overflow-x: hidden;
+}
+
+.btnss {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10vh;
+}
+
+.log {
+  display: block;
+  width: 19vw;
+  padding: 1 0px;
+  font-size: 19px;
+  height: 60px;
+  background-color: rgb(218, 101, 47);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 29px;
+}
+
+.logg {
+  display: block;
+  width: 9vw;
+  padding: 1 0px;
+  font-size: 19px;
+  height: 60px;
+  background-color: rgb(218, 101, 47);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 29px;
 }
 .dialog-class {
   display: flex;
@@ -324,4 +359,5 @@ img {
   min-height: 100vh;
   background-color: #121212;
   color: white;
+  flex-direction: column;
 }

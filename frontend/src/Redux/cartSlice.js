@@ -16,9 +16,11 @@ export const addToCartThunk = createAsyncThunk("cart/add", async (data) => {
       Authorization: `Bearer ${user.accessToken}`,
     },
   };
-
+  console.log(config);
+  console.log(data);
   return await Api.post(`cart/add`, data, config)
     .then((res) => {
+      console.log(data);
       console.log(res);
       return res;
     })
@@ -28,7 +30,7 @@ export const addToCartThunk = createAsyncThunk("cart/add", async (data) => {
     });
 });
 
-export const removeFromCart = createAsyncThunk("cart/remove", async () => {
+export const removeFromCart = createAsyncThunk("cart/remove", async (data) => {
   const user = JSON.parse(localStorage.getItem("userInfo"));
   console.log(user.accessToken);
   const config = {
@@ -38,7 +40,7 @@ export const removeFromCart = createAsyncThunk("cart/remove", async () => {
     },
   };
 
-  return await Api.get(`cart/remove`, config)
+  return await Api.post(`cart/remove/`, data, config)
     .then((res) => {
       console.log(res);
       return res;
@@ -82,7 +84,7 @@ export const cartSlice = createSlice({
       })
       .addCase(addToCartThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        console.log(action.payload);
+        console.log(action);
         if (action.payload.data.success) {
           state.isSuccess = true;
         } else {

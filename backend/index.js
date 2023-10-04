@@ -25,7 +25,7 @@ connectDB();
 console.log(`Connected to port ${process.env.PORT}`);
 
 // Global Error Handling
-app.use(errorMiddleware);
+// app.use(errorMiddleware);
 
 //Routes
 app.use("/auth", authRoutes, errorMiddleware);
