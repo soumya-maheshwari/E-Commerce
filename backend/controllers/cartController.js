@@ -2,10 +2,13 @@ const Cart = require("../models/cartModel");
 const { ErrorHandler } = require("../middlewares/ErrorHandler");
 const mongoose = require("mongoose");
 const Product = require("../models/productModel");
+const mailer = require("../utils/mailer");
 
 const addToCart = async (req, res, next) => {
   try {
     const user = req.user;
+    console.log(user);
+    const email = user.email;
     const userId = user._id;
 
     console.log(user);
@@ -19,6 +22,9 @@ const addToCart = async (req, res, next) => {
       id: productId,
     });
 
+    console.log(product);
+    const namee = product.productName;
+    const price = product.price;
     console.log(product._id);
     if (!product) {
       return next(new ErrorHandler(400, "Product not found"));
@@ -45,6 +51,9 @@ const addToCart = async (req, res, next) => {
       cart.items.push({ product: product._id, quantity: 1 });
     }
     await cart.save();
+
+    mailer.sendEmail(email, namee, price);
+
     return res.status(200).json({
       success: true,
       cart,
