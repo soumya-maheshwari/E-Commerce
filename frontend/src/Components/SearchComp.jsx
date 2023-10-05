@@ -15,7 +15,7 @@ const SearchComp = (props) => {
       >
         <div className="product-card">
           <img src={props.image} alt="" className="prod-img" />
-          <h3>{props.productName}</h3>
+          <h3>{props.name}</h3>
           <p>Price: $ {props.price}</p>
 
           <div className="btns">
