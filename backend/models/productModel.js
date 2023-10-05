@@ -12,7 +12,7 @@ const productSchema = new mongoose.Schema({
     type: String,
   },
   id: {
-    tyoe: String,
+    type: String,
   },
 });
 
