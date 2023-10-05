@@ -35,7 +35,7 @@ const Login = () => {
           });
 
           setTimeout(() => {
-            navigate("/webCam");
+            navigate("/dashboard");
           }, 3000);
 
           localStorage.setItem("userInfo", JSON.stringify(res.payload.data));

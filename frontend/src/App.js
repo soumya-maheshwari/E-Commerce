@@ -14,6 +14,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" exact element={<Login />} />
+        <Route path="/Task" exact element={<Login />} />
+
         <Route path="/signup" exact element={<Signup />} />
         <Route path="/webCam" exact element={<WebCam />} />
         <Route path="/loading" exact element={<Loading />} />
